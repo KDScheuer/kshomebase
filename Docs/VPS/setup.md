@@ -1,4 +1,8 @@
-Install Ubuntu 22.04
+# OS Install 
+- Ubuntu 22.04
+- 2vCPU
+- 8 GB RAM
+- 100 GB NVMe
 
 # Basic System Set-up
 ```bash
