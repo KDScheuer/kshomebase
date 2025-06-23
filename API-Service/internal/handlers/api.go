@@ -9,7 +9,7 @@ import (
 func Handler(r *chi.Mux) {
 
 	// Global Middleware
-	r.User(chimiddle.StripSlashes)
+	r.Use(chimiddle.StripSlashes)
 
 	r.Route("/account", func(router chi.Router) {
 

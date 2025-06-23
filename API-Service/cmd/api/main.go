@@ -3,9 +3,9 @@ package main
 import (
 	"fmt"
 	"net/http"
-	
+
+	"github.com/KDScheuer/kshomebase/API-Service/internal/handlers"
 	"github.com/go-chi/chi"
-	"github.com/KDScheuer/kshomebase/API-Service/handlers"
 	log "github.com/sirupsen/logrus"
 )
 
@@ -17,14 +17,13 @@ func main() {
 
 	fmt.Println("Starting GO API Service...")
 
-	fmt.Println('
+	fmt.Println(`
    _____    ____                 _____    _____ 
   / ____|  / __ \        /\     |  __ \  |_   _|
  | |  __  | |  | |      /  \    | |__) |   | |  
  | | |_ | | |  | |     / /\ \   |  ___/    | |  
  | |__| | | |__| |    / ____ \  | |       _| |_ 
-  \_____|  \____/    /_/    \_\ |_|      |_____|
-	')
+  \_____|  \____/    /_/    \_\ |_|      |_____| `)
 
 	err := http.ListenAndServe("localhost:8000", r)
 	if err != nil {

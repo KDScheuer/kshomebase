@@ -5,9 +5,9 @@ import (
 )
 
 // Database collections
-type loginDetails struct {
-	Authorization string
-	Username      string
+type LoginDetails struct {
+	AuthToken string
+	Username  string
 }
 type CoinDetails struct {
 	Coins    int64
@@ -15,7 +15,7 @@ type CoinDetails struct {
 }
 
 type DatabaseInterface interface {
-	GetUserLoginDetails(username string) *loginDetails
+	GetUserLoginDetails(username string) *LoginDetails
 	GetUserCoins(username string) *CoinDetails
 	SetupDatabase() error
 }
@@ -24,7 +24,7 @@ func NewDatabase() (*DatabaseInterface, error) {
 
 	var database DatabaseInterface = &mockDB{}
 
-	var err Error = database.SetupDatabase()
+	var err error = database.SetupDatabase()
 	if err != nil {
 		log.Error(err)
 		return nil, err
