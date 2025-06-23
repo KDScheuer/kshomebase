@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"api-service/internal/tools"
     "encoding/json"
     "net/http"
     "strings"
@@ -20,21 +21,23 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 
     idToken := strings.TrimPrefix(auth, "Bearer ")
 
-    // TODO: Validate Google token (you’ll add this later)
-    if !isAllowedEmail("example@gmail.com") { // stub
+    claims, err := tools.VerifyGoogleToken(idToken)
+    if err != nil {
+        http.Error(w, "Token invalid: "+err.Error(), http.StatusUnauthorized)
+        return
+    }
+
+    // Check email
+    allowed := map[string]bool{
+        "kdscheuer97@gmail.com":  true,
+        "scheuerkayla@gmail.com": true,
+    }
+    if !allowed[claims.Email] || !claims.EmailVerified {
         http.Error(w, "Access denied", http.StatusForbidden)
         return
     }
 
     json.NewEncoder(w).Encode(map[string]string{
-        "message": "Token accepted",
+        "message": "Welcome, " + claims.Email,
     })
-}
-
-func isAllowedEmail(email string) bool {
-    allowed := map[string]bool{
-        "KDScheuer97@gmail.com":  true,
-        "scheuerkayla@gmail.com": true,
-    }
-    return allowed[email]
 }

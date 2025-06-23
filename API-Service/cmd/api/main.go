@@ -4,8 +4,8 @@ import (
     "log"
     "net/http"
 
-    "github.com/KDScheuer/kshomebase/api-service/internal/handlers"
-    "github.com/KDScheuer/kshomebase/api-service/internal/middleware"
+    "api-service/internal/handlers"
+    "api-service/internal/middleware"
 )
 
 func main() {

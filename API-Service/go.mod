@@ -1,3 +1,3 @@
-module github.com/KDScheuer/kshomebase
+module api-service
 
 go 1.24.4

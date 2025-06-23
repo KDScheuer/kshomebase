@@ -13,6 +13,7 @@ func AuthMiddleware(next http.Handler) http.Handler {
             return
         }
 
+        // token := strings.TrimPrefix(auth, "Bearer ")
         token := strings.TrimPrefix(auth, "Bearer ")
         if token != "example-token" { // You’ll replace this later with real logic
             http.Error(w, "Invalid token", http.StatusUnauthorized)
