@@ -6,7 +6,7 @@ import (
 
 	"github.com/KDScheuer/kshomebase/API-Service/api"
 	"github.com/KDScheuer/kshomebase/API-Service/internal/tools"
-	log "githuib.com/sirupsen/logrus"
+	log "github.com/sirupsen/logrus"
 )
 
 var UnAuthorizedError = errors.New("Invalid username or token")

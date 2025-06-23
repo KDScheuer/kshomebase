@@ -7,8 +7,6 @@ import (
 	"github.com/KDScheuer/kshomebase/API-Service/api"
 	"github.com/KDScheuer/kshomebase/API-Service/internal/tools"
 	"github.com/gorilla/schema"
-	"github.com/kdscheuer/kshomebase/api-service/api"
-	"github.com/kdscheuer/kshomebase/api-service/internal/tools"
 	log "github.com/sirupsen/logrus"
 )
 
