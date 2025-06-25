@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Task List</title>
+  <script src="https://unpkg.com/htmx.org@1.9.2"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 2rem;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    li {
+      background: #f3f3f3;
+      margin-bottom: 1rem;
+      padding: 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    li:hover {
+      background: #e0e0e0;
+    }
+
+    /* Full-screen modal for task details */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.8);
+      color: white;
+      z-index: 9999;
+      padding: 2rem;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal.show {
+      display: flex;
+    }
+
+    .task-detail {
+      background: #222;
+      padding: 2rem;
+      border-radius: 1rem;
+      max-width: 600px;
+      width: 100%;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    }
+
+    .task-detail button {
+      float: right;
+      background: #444;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      margin-bottom: 1rem;
+      cursor: pointer;
+    }
+
+    .task-detail button:hover {
+      background: #666;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Task List</h1>
+
+  <!-- Task list gets rendered here by HTMX -->
+  <div id="task-list" hx-get="http://127.0.0.1:8000/api/tasks" hx-trigger="load" hx-swap="innerHTML">
+    <!-- Populated via HTMX -->
+  </div>
+
+  <!-- Task details will go here -->
+  <div id="task-details" class="modal" hx-swap-oob="true">
+    <!-- Populated by /api/tasks/:id response -->
+  </div>
+
+<script>
+  document.body.addEventListener('htmx:afterSwap', function(evt) {
+    // Check if the target is the task-details modal
+    if (evt.detail.target.id === 'task-details') {
+      const modal = document.getElementById('task-details');
+      if (modal.innerHTML.trim()) {
+        modal.classList.add('show');
+      } else {
+        modal.classList.remove('show');
+      }
+    }
+  });
+</script>
+
+</body>
+</html>
