@@ -13,6 +13,7 @@ def sql_helper(method: str, cmd: str, params: tuple = ()):
 
         if method == "fetchall":
             results = cursor.fetchall()
+            print(results)
         elif method == "fetchone":
             results = cursor.fetchone()
         elif method in ("insert", "update"):

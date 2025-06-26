@@ -4,7 +4,7 @@ from db.db_helper import sql_helper
 def getTasks():
     rows = sql_helper(method="fetchall", cmd="SELECT id, title, description, due_date FROM tasks WHERE completed = 0")
     
-    if rows == None:
+    if rows == None or rows == []:
         return "</p> All tasks Complete </p>"
 
     html = "<ul>"
@@ -41,9 +41,26 @@ def get_task_detail(task_id):
         </div>"""
     return html
 
+
 def mark_task_complete(task_id):
     #TODO Have is set completion date as well
     status = sql_helper(method="update", cmd="UPDATE tasks SET completed = 1 WHERE id = ?", params=(task_id,))
     if status == None:
         print(f"Failed mark task {task_id} Complete")
         return "<p>Failed to mark complete</p>"
+    
+#TODO Add a task
+
+#TODO Add a reoccuring task (default should not display a task right away)
+      #TODO Add ability to display task immedaitly after creation
+
+#TODO Add utility to audit task templates table and auto populate a new task if one is due
+
+#TODO Add ability to delete task
+
+#TODO If reoccuring task add ability to delete task template (all reoccurances from happening)
+
+#TODO Add ability to view all completed tasks (default should disply last 7 days)
+      #TODO should have an option to view all completed tasks in the DB
+
+#TODO Add utility to purge completed tasks after 90 days
