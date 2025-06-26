@@ -1,4 +1,3 @@
-import sqlite3
 from db.db_helper import sql_helper
 
 def getTasks():
@@ -12,7 +11,7 @@ def getTasks():
         id, title, description, due_date = row
         
         html += f"""
-            <li hx-get="http://127.0.0.1:8000/api/tasks/{id}" hx-target="#content" hx-swap="innerHTML">
+            <li hx-get="http://192.168.50.24:8000/api/tasks/{id}" hx-target="#content" hx-swap="innerHTML">
                 <h3>{title}</h3>
                 <p>{description}</p>
                 <i>Due: {due_date}</i>
@@ -36,8 +35,8 @@ def get_task_detail(task_id):
                 <p><strong>Due:</strong> {due_date}</p>
                 <p><strong>Completed:</strong> {'Yes' if completed else 'No'}</p>
             </div>
-        <button hx-get="http://127.0.0.1:8000/api/tasks" hx-target="#content" hx-swap="innerHTML">Close </button>
-        <button hx-patch="http://127.0.0.1:8000/api/tasks/{task_id}/complete" hx-target="this" hx-swap="outerHTML" hx-trigger="click">Complete</button>
+        <button hx-get="http://192.168.50.24:8000/api/tasks" hx-target="#content" hx-swap="innerHTML">Close </button>
+        <button hx-patch="http://192.168.50.24:8000/api/tasks/{task_id}/complete" hx-target="this" hx-swap="outerHTML" hx-trigger="click">Complete</button>
         </div>"""
     return html
 

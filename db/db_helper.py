@@ -1,13 +1,13 @@
 import sqlite3
+from config.config import Config
 
-DB_PATH = "data/homebase.db"
 
 def sql_helper(method: str, cmd: str, params: tuple = ()):
     method = method.lower()
     results = None
 
     try:
-        conn = sqlite3.connect(DB_PATH)
+        conn = sqlite3.connect(Config.DB_PATH)
         cursor = conn.cursor()
         cursor.execute(cmd, params)
 
