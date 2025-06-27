@@ -9,6 +9,9 @@
 <body>
   <h1>Task List</h1>
   <div id="content" hx-get="http://127.0.0.1:8000/api/tasks" hx-trigger="load" hx-swap="innerHTML">
+    <p>Fetching Tasks</p>
+    <button hx-get="http://127.0.0.1:8000/api/tasks/create_task_menu" hx-target="#content" hx-swap="innerHTML" hx-trigger="click">Add Task</button>
   </div>
+
 </body>
 </html>

@@ -20,15 +20,13 @@ CREATE TABLE task_templates (
 );
 
 CREATE TABLE tasks (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    template_id INTEGER,             
+    id INTEGER PRIMARY KEY AUTOINCREMENT,         
     title TEXT NOT NULL,
-    description TEXT,
-    display_on TEXT NOT NULL,   --May not need this     
+    description TEXT,   
     due_date TEXT,                   
     completed INTEGER DEFAULT 0,
     created_at TEXT DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (template_id) REFERENCES task_templates(id) --May not need this
+    completed_on TEXT
 );
 
 CREATE TABLE grocery_items (

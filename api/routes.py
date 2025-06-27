@@ -14,7 +14,7 @@ class APIRouter(BaseHTTPRequestHandler):
         self.send_response(204)
         self.send_header('Access-Control-Allow-Origin', '*')
         self.send_header('Access-Control-Allow-Methods', 'GET, PATCH, POST, OPTIONS')
-        self.send_header('Access-Control-Allow-Headers', 'Content-Type, HX-Request, HX-Trigger, HX-Target, HX-Current-URL, hx-Post')
+        self.send_header('Access-Control-Allow-Headers', 'Content-Type, HX-Request, HX-Trigger, HX-Target, HX-Current-URL, HX-Post')
         self.end_headers()
 
 
