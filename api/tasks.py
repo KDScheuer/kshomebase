@@ -72,6 +72,12 @@ def create_task_menu():
         <button hx-get="http://{Config.LISTEN_ADDR}:{Config.LISTEN_PORT}/api/tasks" hx-target="#content" hx-swap="innerHTML">Cancel</button>"""
 
 def create_task(request):
+     #TODO Sanitize Input
+     #TODO Create Task in DB
+     #TODO Error Handling
+     #TODO Display success somehow
+     #TODO Reload main page
+     
      # read the raw body
     content_length = int(request.headers.get('Content-Length', 0))
     body = request.rfile.read(content_length).decode()
