@@ -1,6 +1,6 @@
 import json
 from http.server import BaseHTTPRequestHandler
-from api.tasks import getTasks, get_task_detail, mark_task_complete, create_task_menu
+from api.tasks import getTasks, get_task_detail, mark_task_complete, create_task_menu, create_task
 
 class APIRouter(BaseHTTPRequestHandler):
     def _send_html(self, html, status=200):
@@ -14,7 +14,7 @@ class APIRouter(BaseHTTPRequestHandler):
         self.send_response(204)
         self.send_header('Access-Control-Allow-Origin', '*')
         self.send_header('Access-Control-Allow-Methods', 'GET, PATCH, POST, OPTIONS')
-        self.send_header('Access-Control-Allow-Headers', 'Content-Type, HX-Request, HX-Trigger, HX-Target, HX-Current-URL')
+        self.send_header('Access-Control-Allow-Headers', 'Content-Type, HX-Request, HX-Trigger, HX-Target, HX-Current-URL, hx-Post')
         self.end_headers()
 
 
@@ -47,3 +47,7 @@ class APIRouter(BaseHTTPRequestHandler):
 
         # If no match
         self._send_html("<p>Unsupported PATCH request</p>", status=404)
+
+    def do_POST(self):
+        if self.path == "/api/tasks/create_task":
+            return self._send_html(create_task(self))

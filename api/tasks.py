@@ -1,3 +1,5 @@
+import urllib.parse
+
 from config.config import Config
 from db.db_helper import sql_helper
 
@@ -52,7 +54,7 @@ def mark_task_complete(task_id):
     
 def create_task_menu():
     return f"""
-        <form hx-post="http://{Config.LISTEN_ADDR}:{Config.LISTEN_PORT}/api/tasks/create_task" hx-target="#response" hx-swap="innerHTML">
+        <form hx-post="http://{Config.LISTEN_ADDR}:{Config.LISTEN_PORT}/api/tasks/create_task" hx-target="#content" hx-swap="innerHTML">
             <label>Title:
                 <input type="text" name="title" required>
             </label><br>
@@ -68,7 +70,25 @@ def create_task_menu():
             <button type="submit">Create Task</button>
         </form>
         <button hx-get="http://{Config.LISTEN_ADDR}:{Config.LISTEN_PORT}/api/tasks" hx-target="#content" hx-swap="innerHTML">Cancel</button>"""
-    
+
+def create_task(request):
+     # read the raw body
+    content_length = int(request.headers.get('Content-Length', 0))
+    body = request.rfile.read(content_length).decode()
+
+    # parse form data
+    form_data = urllib.parse.parse_qs(body)
+
+    # extract form values
+    title = form_data.get("title", ["NONE"])[0]
+    description = form_data.get("description", ["NONE"])[0]
+    due_date = form_data.get("due_date", [""])[0]
+
+    print(f"Received task: {title=}, {description=}, {due_date=}")
+
+    # Do DB insert or whatever logic you need
+    return f"<p>Task '{title}' {description} {due_date} created!</p>"
+
 #TODO Add a task
 
 #TODO Add a reoccuring task (default should not display a task right away)
