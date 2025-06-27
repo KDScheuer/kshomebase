@@ -24,11 +24,11 @@ CREATE TABLE tasks (
     template_id INTEGER,             
     title TEXT NOT NULL,
     description TEXT,
-    display_on TEXT NOT NULL,        
+    display_on TEXT NOT NULL,   --May not need this     
     due_date TEXT,                   
     completed INTEGER DEFAULT 0,
     created_at TEXT DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (template_id) REFERENCES task_templates(id)
+    FOREIGN KEY (template_id) REFERENCES task_templates(id) --May not need this
 );
 
 CREATE TABLE grocery_items (

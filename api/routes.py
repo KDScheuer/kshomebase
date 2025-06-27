@@ -1,6 +1,6 @@
 import json
 from http.server import BaseHTTPRequestHandler
-from api.tasks import getTasks, get_task_detail, mark_task_complete
+from api.tasks import getTasks, get_task_detail, mark_task_complete, create_task_menu
 
 class APIRouter(BaseHTTPRequestHandler):
     def _send_html(self, html, status=200):
@@ -21,6 +21,8 @@ class APIRouter(BaseHTTPRequestHandler):
     def do_GET(self):
         if self.path == "/api/tasks":
             return self._send_html(getTasks())
+        elif self.path == "/api/tasks/create_task_menu":
+            return self._send_html(create_task_menu())
         elif self.path.startswith("/api/tasks/"):
             try:
                 task_id = int(self.path.split("/")[-1])
